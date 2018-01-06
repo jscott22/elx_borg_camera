@@ -10,8 +10,7 @@ defmodule Camera.MixProject do
       deps: deps()
     ]
   end
-
-  # Run "mix help compile.app" to learn about applications.
+  
   def application do
     [
       extra_applications: [:logger],
@@ -19,12 +18,10 @@ defmodule Camera.MixProject do
     ]
   end
 
-  # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:picam, "~> 0.1.0"}
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
+      {:picam, "~> 0.1.0", only: :prod},
+      {:dummy_nerves, path: "../dummy_nerves", only: [:dev, :test]}
     ]
   end
 end
