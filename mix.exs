@@ -13,15 +13,20 @@ defmodule Camera.MixProject do
   
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: applications(Mix.env),
       mod: {Camera.Application, []}
     ]
   end
 
+  defp applications(env) when env in [:prod, :dev], do: [:picam | general_apps()]
+  defp applications(_), do: general_apps()
+
+  defp general_apps, do: [:logger]
+
   defp deps do
     [
-      {:picam, "~> 0.1.0", only: :prod},
-      {:dummy_nerves, path: "../dummy_nerves", only: [:dev, :test]}
+      {:picam, "~> 0.1.0", only: [:prod, :dev]},
+      {:dummy_nerves, path: "../dummy_nerves", only: [:host_dev, :test]}
     ]
   end
 end
